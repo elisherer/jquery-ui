@@ -169,10 +169,10 @@ test("moveToTop", function() {
 
 test( "moveToTop: content scroll stays intact", function() {
 	expect( 2 );
-	var otherDialog = $( "#dialog1" ).dialog();
-	var scrollDialog = $( "#form-dialog" ).dialog({
-		height: 200
-	});
+	var otherDialog = $( "#dialog1" ).dialog(),
+		scrollDialog = $( "#form-dialog" ).dialog({
+			height: 200
+		});
 	scrollDialog.scrollTop( 50 );
 	equal( scrollDialog.scrollTop(), 50 );
 
