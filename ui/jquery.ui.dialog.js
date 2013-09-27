@@ -199,7 +199,15 @@ $.widget( "ui.dialog", {
 	},
 
 	_moveToTop: function( event, silent ) {
-		var moved = !!this.uiDialog.nextAll(":visible").insertBefore( this.uiDialog ).length;
+		var moved = false,
+			zIndices = this.uiDialog.siblings(".ui-front:visible").map(function() {
+				return $( this ).css( "z-index" );
+			}).sort().get().reverse();
+		if (zIndices[ 0 ] >= this.uiDialog.css( "z-index" ) ) {
+			this.uiDialog.css( "z-index", parseInt( zIndices[ 0 ], 10 ) + 1 );
+			moved = true;
+		}
+
 		if ( moved && !silent ) {
 			this._trigger( "focus", event );
 		}
